@@ -1,0 +1,4 @@
+section .meme-container{
+    display: flex;
+    justify-content: space-around;
+}

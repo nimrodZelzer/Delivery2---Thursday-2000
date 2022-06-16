@@ -1,0 +1,11 @@
+.container{
+    background-color: var(--clr1);
+}
+.meme-container{
+    display: flex;
+    /* flex-grow: 1; */
+}
+canvas{
+    height: 400px;
+    width: 400px;
+}

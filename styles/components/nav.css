@@ -1,0 +1,30 @@
+
+.nav-gallery{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-gallery >*{
+    min-height: 58px;
+    flex-grow: 1;
+}
+
+.nav-gallery .search-bar{
+    min-height: 58px;
+    flex-grow: 2;
+
+}
+
+.nav-gallery .btn-more{
+    background: linear-gradient(-60deg, var(--clr3) 50%, var(--clr4) 50%);
+
+}
+
+.nav-gallery .keywords{
+    padding-top: 1em;
+    background-color: #87898d;
+    flex-grow: 2;
+    border: 3px solid #87898d;
+    border-radius: 10em;
+    text-align: center;
+}

@@ -1,0 +1,13 @@
+.gallery-container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: var(--clr1);
+}
+
+.gallery {
+    height: 100%;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3,1fr);
+  }

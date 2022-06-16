@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: playfair, serif;
+    color: var(--clr1);
+}
+
+body{
+    background-color: var(--clr5);
+}
+header{
+  height: 73px;
+  transition: 0.3s;
+  background:  linear-gradient(-60deg, var(--clr3) 50%, var(--clr4) 50%);  margin: 10px 3px;
+  border-radius: 10em;
+}
+
+
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+nav >*{
+    margin-top: 2%;
+}
+
+
+/* @keyframes change-color {
+   0% { background-color: #21ac91}
+   100% { background-color: #19a59f}
+  } */
