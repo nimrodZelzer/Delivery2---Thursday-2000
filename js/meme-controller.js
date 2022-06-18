@@ -1,5 +1,5 @@
 'use strict'
-
+var gTouchEvs = ['onmousedown', 'onmouseup']
 
 function renderEditor() {
     var strHtml = `<div class="meme-container">`
@@ -17,11 +17,11 @@ function renderEditor() {
         </div>
         <div class="text-container">
         <div class="text-size-btn">
-            <button onclick="onChangeTextSize(this)" class="plus-btn"><img src="/styles/images/add.png" alt=""></button>
+            <button onclick="onChangeTextSize(this)" class="plus-btn"><img src="styles/images/add.png" alt=""></button>
             <button onclick="onChangeTextSize(this)" class="minus-btn">-</button>
-            <button onclick="onChangeTextAlign(this)" name="start"><img src="/styles/images/align-to-left.png" alt=""></button>
-            <button onclick="onChangeTextAlign(this)" name="end"><img src="/styles/images/align-to-right.png" alt=""></button>
-            <button onclick="onChangeTextAlign(this)" name="center" class="center-btn"><img src="/styles/images/center-text-alignment.png" alt=""></button>
+            <button onclick="onChangeTextAlign(this)" name="start"><img src="styles/images/align-to-left.png" alt=""></button>
+            <button onclick="onChangeTextAlign(this)" name="end"><img src="styles/images/align-to-right.png" alt=""></button>
+            <button onclick="onChangeTextAlign(this)" name="center" class="center-btn"><img src="styles/images/center-text-alignment.png" alt=""></button>
             </div>
             <div class="text-font-btn">
             <select name="fonts" id="" onclick="onChangeFont(this.value)">
