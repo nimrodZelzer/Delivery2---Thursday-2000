@@ -4,4 +4,12 @@
     font-family: poppins;
     src: url(/styles/fonts/Poppins-Light.ttf);
 }
+@font-face {
+    font-family: poppins-medium;
+    src: url(/styles/fonts/Poppins-Medium.ttf);
+}
+@font-face {
+    font-family: impact;
+    src: url(/styles/fonts/impact.ttf);
+}
 

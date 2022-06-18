@@ -1,11 +1,10 @@
 .container{
     background-color: var(--clr1);
 }
-.meme-container{
+section .meme-container{
+    height: 90vh;
     display: flex;
-    /* flex-grow: 1; */
-}
-canvas{
-    height: 400px;
-    width: 400px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--clr5);
 }

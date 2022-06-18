@@ -11,12 +11,19 @@ body{
     background-color: var(--clr5);
 }
 header{
-  height: 73px;
+  height: 100px;
   transition: 0.3s;
   background:  linear-gradient(-60deg, var(--clr3) 50%, var(--clr4) 50%);  margin: 10px 3px;
   border-radius: 10em;
 }
 
+  
+
+.logo{
+    height: 90px;
+   box-shadow: none;
+   margin-top: 2px;
+}
 
 
 nav{
@@ -25,10 +32,14 @@ nav{
     justify-content: space-around;
 }
 
-nav >*{
-    margin-top: 2%;
-}
 
+
+canvas {
+    width: 500px;
+    height: 500px;
+    border: 10px solid var(--clr1) ;
+    border-radius: 20px;
+  }
 
 /* @keyframes change-color {
    0% { background-color: #21ac91}

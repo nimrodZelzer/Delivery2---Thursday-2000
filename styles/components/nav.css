@@ -2,17 +2,20 @@
 .nav-gallery{
     display: flex;
     align-items: center;
-    gap: 20px;
+    margin: 0 60px;
+    gap: 30px;
 }
 .nav-gallery >*{
     min-height: 58px;
-    flex-grow: 1;
+   font-size: 2rem;
+   margin: auto;
+   flex: 1;
+   font-family: poppins-medium;
+   border-radius: 20px;
 }
 
 .nav-gallery .search-bar{
     min-height: 58px;
-    flex-grow: 2;
-
 }
 
 .nav-gallery .btn-more{
@@ -21,10 +24,11 @@
 }
 
 .nav-gallery .keywords{
-    padding-top: 1em;
+    padding-top: 5px;
+    color: black;
     background-color: #87898d;
-    flex-grow: 2;
     border: 3px solid #87898d;
     border-radius: 10em;
     text-align: center;
 }
+

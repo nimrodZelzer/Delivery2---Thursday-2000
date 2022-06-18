@@ -12,7 +12,7 @@
 @import 'components/main-header.css';
 @import 'components/gallery.css';
 @import 'components/nav.css';
-@import 'components/screen.css';
+@import 'components/editor.css';
 
 /* Media Queries */
 @import 'mq/mq.css';
@@ -21,29 +21,5 @@
 
 body {
   margin: 0;
-  color: bisque;
 }
 
-img {
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
-  margin: 1rem;
-  border-radius: 10px;
-  box-shadow: black 4px 5px 10px 0px;
-}
-
-
-
-canvas {
-  background-color: bisque;
-  max-width: 400px;
-  max-height: 400px;
-}
-
-
-
-.edit-container>* {
-  margin-bottom: 3rem;
-
-}

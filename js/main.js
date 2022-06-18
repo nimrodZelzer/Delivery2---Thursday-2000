@@ -1,35 +1,53 @@
+'use strict'
+
 var gNumOfImages = 18
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
-var gKeyWords = ['hello', 'wowo', 'yesss'];
+var gKeyWords = ['president', 'baby', 'funny'];
 
 
 
 
 
 renderGallery()
+renderNavBar()
 
-
-
-function renderGallery() {
-    var images = getImages()
+function renderNavBar() {
     var keywords = [...gKeyWords].join(" ")
-    console.log(keywords)
-    var strHtml = `<div class="gallery-container">`
-    strHtml += `<div class="nav-gallery">`
-    strHtml += `<input type="search" class="search-bar">`
+    var strHtml = ""
+    strHtml += `<input type="search" placeholder ="search" class="search-bar" onkeyup="setImageFilter(this.value)">`
     strHtml += `<p class="keywords">${keywords}</p> `
     strHtml += `<button class="btn-more">more</button> `
-    strHtml += `</div > `
+    document.querySelector('.nav-gallery').innerHTML = strHtml
+}
+function renderGallery(images = getImages()) {
+    var strHtml = ""
     strHtml += `<div class="gallery">`
     for (var i = 0; i < images.length; i++) {
         strHtml += `<img src ="${images[i].url}" onclick ="renderMeme(${images[i].id})"> `
     }
     strHtml += `</div > `
-    strHtml += `</div > `
-    document.querySelector('.container').innerHTML = strHtml
+    document.querySelector('.gallery-container').innerHTML = strHtml
 }
 
 
+function onSetFilterBy(filterBy) {
+    filterBy = setImageFilter(filterBy)
+    renderGallery()
+}
+function setImageFilter(text = "") {
+    var images = getImages()
+    console.log(images[1].keywords)
+    console.log(images)
+    if (text === "") {
+        renderGallery(images)
+        return
+    }
+    var sortedImages = images.filter(image => image.keywords.join(" ").includes(text));
+    console.log(text)
+    console.log(sortedImages)
+    renderGallery(sortedImages)
+    document.querySelector('.search-bar').value = text
+}
 
 function addListeners() {
     addMouseListeners()
