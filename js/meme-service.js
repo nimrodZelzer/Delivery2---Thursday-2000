@@ -1,7 +1,6 @@
 'use strict'
 var gCtx
 var gCanvas
-var gFont
 var gMeme = {
     selectedImg: -1,
     selectedLineIdx: 0,
@@ -15,7 +14,8 @@ var gMeme = {
             strokeColor: 'black',
             positionY: 30,
             positionX: 130,
-            isDrag: false
+            isDrag: false,
+            font: "imapct"
         }
     ]
 }
@@ -54,14 +54,13 @@ function renderMeme(imgId = gMeme.selectedImg) {
     var image = getImageById(imgId)
     gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height);
     drawText()
-    console.log(gMeme.lines[gMeme.selectedLineIdx].positionY)
 }
 
 function drawText() {
     for (var i = 0; i <= gMeme.lines.length - 1; i++) {
         if (!gMeme.lines[i].txt) continue
         gCtx.textAlign = gMeme.lines[i].align
-        gCtx.font = `${gMeme.lines[i].size}px ${gFont}`
+        gCtx.font = `${gMeme.lines[i].size}px ${gMeme.lines[i].font}`
         gCtx.color = gMeme.lines[i].color
         gCtx.fillStyle = gMeme.lines[i].color
         gCtx.strokeStyle = gMeme.lines[i].strokeColor;
@@ -72,12 +71,9 @@ function drawText() {
 }
 
 function setLineTxt(text = gMeme.lines[gMeme.selectedLineIdx].txt) {
-    console.log('line length', gMeme.lines.length)
     gMeme.lines[gMeme.selectedLineIdx].txt = text
-    console.log(text);
     renderMeme()
 }
-
 
 function changeTextSize(elBtn) {
     if (elBtn.classList.contains('plus-btn')) {
@@ -92,25 +88,21 @@ function changeTextAlignment(elBtn) {
 }
 
 function changeFont(value) {
-    console.log(value)
-    gFont = value
+    gMeme.lines[gMeme.selectedLineIdx].font = value
+    renderMeme()
 }
-
 
 function getColor(elColor) {
     const val = elColor.value;
     if (elColor.classList.contains("stroke")) { gMeme.lines[gMeme.selectedLineIdx].strokeColor = val }
     else { gMeme.lines[gMeme.selectedLineIdx].color = val }
-    console.log('here')
     renderMeme()
 }
 
 function addLine(positionX = 120, txt = '') {
     if (gMeme.selectedLineIdx === 0 && gMeme.lines[gMeme.selectedLineIdx].txt === "") return
-    console.log('txt', txt)
     gMeme.selectedLineIdx++
     gMeme.lines.push(createLine(positionX, txt))
-    console.log(gMeme.lines)
     renderMeme()
 }
 
@@ -119,6 +111,7 @@ function switchLine() {
     if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0;
     renderMeme()
 }
+
 function deleteLine() {
     if (!gMeme.lines.length || gMeme.lines[gMeme.selectedLineIdx].txt === "") return
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
@@ -126,7 +119,6 @@ function deleteLine() {
     if (gMeme.selectedLineIdx === -1) addLine()
     renderMeme()
 }
-
 
 function getImageById(imgId) {
     var imageObj = gImgs.find(image => imgId === image.id)
@@ -140,14 +132,17 @@ function downloadImg(elLink) {
     elLink.href = imgContent
 }
 
+function shareImg(elLink) {
+    var imgContent = gCanvas.toDataURL('image/png')// image/jpeg the default format
+    elLink.href = `https://www.facebook.com/sharer/.php?u=http//${imgContent}`
+}
+
 function lineMove(elBtn) {
     if (elBtn.classList.contains('move-up')) { gMeme.lines[gMeme.selectedLineIdx].positionY -= 20 }
     else { gMeme.lines[gMeme.selectedLineIdx].positionY += 20 }
     renderMeme()
 
 }
-
-
 
 function createLine(positionX, txt = '') {
     return {
@@ -164,39 +159,27 @@ function createLine(positionX, txt = '') {
 }
 
 function isTextClicked(clickedPos) {
-    // Calc the distance between two dots
     for (var i = 0; i < gMeme.lines.length; i++) {
         const distanceY = (clickedPos.y / 2 - gMeme.lines[i].positionY)
-        console.log('clickedPos.positionY', clickedPos.y);
-        console.log('positionY', gMeme.lines[i].positionY);
-        console.log('size', gMeme.lines[i].size);
-        // console.log('distanceY', distanceY)
         if (distanceY <= gMeme.lines[i].positionY) {
             gMeme.selectedLineIdx = i
             console.log(gMeme.lines[i].txt)
             return true
         }
     }
-    console.log(gMeme.lines[i])
     return false
 }
-
 
 function onMove(ev) {
     if (gMeme.lines[gMeme.selectedLineIdx].isDrag) {
         const pos = getEvPos(ev)
-        //Calc the delta , the diff we moved
         const dx = pos.x - gMeme.lines[gMeme.selectedLineIdx].positionX
         const dy = pos.y - gMeme.lines[gMeme.selectedLineIdx].positionY
         moveLine(dx, dy)
-        //Save the last pos , we remember where we`ve been and move accordingly
         gStartPos = pos
-        //The canvas is render again after every move
         renderMeme()
     }
 }
-
-
 
 function moveLine(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].positionX += dx
@@ -206,6 +189,7 @@ function moveLine(dx, dy) {
 function getMeme() {
     return gMeme
 }
+
 function getRandom(min, max) {
     return Math.random() * (max - min) + min;
 }

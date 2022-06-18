@@ -1,7 +1,6 @@
 'use strict'
 
 var gNumOfImages = 18
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 var gKeyWords = ['president', 'baby', 'funny'];
 
 
@@ -19,6 +18,7 @@ function renderNavBar() {
     strHtml += `<button class="btn-more">more</button> `
     document.querySelector('.nav-gallery').innerHTML = strHtml
 }
+
 function renderGallery(images = getImages()) {
     var strHtml = ""
     strHtml += `<div class="gallery">`
@@ -34,6 +34,7 @@ function onSetFilterBy(filterBy) {
     filterBy = setImageFilter(filterBy)
     renderGallery()
 }
+
 function setImageFilter(text = "") {
     var images = getImages()
     console.log(images[1].keywords)
@@ -49,29 +50,5 @@ function setImageFilter(text = "") {
     document.querySelector('.search-bar').value = text
 }
 
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-    addResizeListener()
-}
-
-function addResizeListener() {
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
-}
-
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mouseup', onUp)
-}
-
-function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onMove)
-    gCanvas.addEventListener('touchstart', onDown)
-    gCanvas.addEventListener('touchend', onUp)
-}
 
 

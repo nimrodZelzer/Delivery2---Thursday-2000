@@ -8,3 +8,13 @@ section .meme-container{
     align-items: center;
     background-color: var(--clr5);
 }
+
+.edit-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 500px;
+    padding: 24px 40px;
+    background-color: var(--clr1);
+    border-radius: 20px;
+}

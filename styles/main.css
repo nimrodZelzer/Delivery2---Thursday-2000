@@ -5,13 +5,12 @@
 /* BASE */
 @import 'basic/base.css';
 @import 'basic/layout.css';
-@import 'basic/helpers.css';
 /* @import 'basic/hover.css'; */
 
 /* COMPONENTS */
 @import 'components/main-header.css';
 @import 'components/gallery.css';
-@import 'components/nav.css';
+@import 'components/nav-gallery.css';
 @import 'components/editor.css';
 
 /* Media Queries */

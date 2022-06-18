@@ -11,10 +11,12 @@
    margin: auto;
    flex: 1;
    font-family: poppins-medium;
+   color: white;
    border-radius: 20px;
 }
 
 .nav-gallery .search-bar{
+    color: black;
     min-height: 58px;
 }
 
@@ -25,7 +27,6 @@
 
 .nav-gallery .keywords{
     padding-top: 5px;
-    color: black;
     background-color: #87898d;
     border: 3px solid #87898d;
     border-radius: 10em;

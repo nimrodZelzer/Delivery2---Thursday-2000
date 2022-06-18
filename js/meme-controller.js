@@ -1,22 +1,19 @@
-
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
-
-
-
+'use strict'
 
 
 function renderEditor() {
     var strHtml = `<div class="meme-container">`
-    strHtml += `    <canvas onmousedown="getEvPos(event)">
+    strHtml += `  <div class="canvas-container">  <canvas  onmousedown="getEvPos(event)">
     </canvas>
+    </div>
     <div class="edit-container">
         <input type="text" onkeyup="setLineTxt(this.value)" placeholder="write text" class="input">
         <div class="line-container">
         <button onclick="onLineMove(this)" class="edit-btn move-up up-down">&#8593;</button>
         <button onclick="onLineMove(this)" class="edit-btn up-down">&#8595;</button>
         <button onclick="onAddLine(this)" class="edit-btn add">+</button>
-            <button onclick="onSwitchLine(this)" class="edit-btn switch">&#8593;&#8595;</button>
-            <button onclick="onDeleteLine(this)" class="edit-btn delete">&#128465;</button>
+            <button onclick="onSwitchLine()" class="edit-btn switch">&#8593;&#8595;</button>
+            <button onclick="onDeleteLine()" class="edit-btn delete">&#128465;</button>
         </div>
         <div class="text-container">
         <div class="text-size-btn">
@@ -27,7 +24,7 @@ function renderEditor() {
             <button onclick="onChangeTextAlign(this)" name="center" class="center-btn"><img src="/styles/images/center-text-alignment.png" alt=""></button>
             </div>
             <div class="text-font-btn">
-            <select name="fonts" id="" onchange="onChangeFont(this.value)">
+            <select name="fonts" id="" onclick="onChangeFont(this.value)">
             <option value="impact">impact</option>
             <option value="poppins">poppins</option>
             <option value="sans-serif">sans serif</option>
@@ -44,9 +41,11 @@ function renderEditor() {
             <span onclick = onEmoji(this)>&#128515;</span>
         </div>
         <div class="down-container">
-        <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.png"
+        <a href="#" class="btn" onclick="onDownloadImg(this)" download="my-img.png"
         >Download</a>
-        <a class="fb" href="" onclick()="share()" >
+        <a class="share-btn" onclick="shareImg(this)"
+            href="" target="#"
+            rel="noopener">
          Share on Facebook
         </a>
         </div>
@@ -56,11 +55,13 @@ function renderEditor() {
 
 }
 
+function onDownloadImg(elLink) {
+    downloadImg(elLink)
+}
 
 function onGetColor(elColor) {
     getColor(elColor)
 }
-
 
 function onChangeTextSize(elBtn) {
     changeTextSize(elBtn)
@@ -76,7 +77,7 @@ function onAddLine() {
 }
 
 function onSwitchLine() {
-    meme = getMeme()
+    var meme = getMeme()
     switchLine()
     document.querySelector('.input').value = meme.lines[meme.selectedLineIdx].txt
 }
@@ -98,26 +99,20 @@ function onEmoji(elSpan) {
     addLine(60, elSpan.innerText)
 }
 
-
 function getEvPos(ev) {
-    //Gets the offset pos , the default pos
     var pos = {
         x: ev.offsetX,
         y: ev.offsetY
     }
-    // Check if its a touch ev
     if (gTouchEvs.includes(ev.type)) {
-        //soo we will not trigger the mouse ev
         ev.preventDefault()
-        //Gets the first touch point
         ev = ev.changedTouches[0]
-        //Calc the right pos according to the touch screen
         pos = {
             x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
             y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
         }
     }
-    meme = getMeme()
+    var meme = getMeme()
     if (isTextClicked(pos)) meme.lines[meme.selectedLineIdx].isDrag = true
     // onMove(pos)
     document.querySelector('.input').value = meme.lines[meme.selectedLineIdx].txt
@@ -127,21 +122,3 @@ function getEvPos(ev) {
 
 
 
-
-
-// The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
-function onImgInput(ev) {
-    loadImageFromInput(ev, renderImg)
-}
-//                               CallBack func will run on success load of the img
-function loadImageFromInput(ev, onImageReady) {
-    var reader = new FileReader()
-    //After we read the file
-    reader.onload = function (event) {
-        var img = new Image()// Create a new html img element
-        img.src = event.target.result // Set the img src to the img file we read
-        //Run the callBack func , To render the img on the canvas
-        img.onload = onImageReady.bind(null, img)
-    }
-    reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
-}
