@@ -19,3 +19,14 @@
     
     }
 }
+
+
+@media (max-width: 1345px) {
+    .nav-gallery .keywords{
+      font-size: 1.5rem;
+  }
+  
+  .nav-gallery .btn-more{
+    font-size: 1.5rem;
+  }
+}
